@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+}
+
+.prose-cressida p {
+  margin-bottom: 1.25em;
+  color: #3E4A47;
+  line-height: 1.7;
+}
+.prose-cressida strong {
+  color: #14171A;
+  font-weight: 600;
+}
+.prose-cressida h2 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
