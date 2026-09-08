@@ -8,7 +8,7 @@ import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
 import { getInsightBySlug } from '@/lib/insights';
 import { brand } from '@/lib/brand';
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 // Posts live in Supabase, not the codebase, so this can't use
 // generateStaticParams the way loan/property pages do without a rebuild per
@@ -17,7 +17,8 @@ type Props = { params: { slug: string } };
 export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getInsightBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getInsightBySlug(slug);
   if (!post) return {};
 
   return {
@@ -28,7 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function InsightPostPage({ params }: Props) {
-  const post = await getInsightBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getInsightBySlug(slug);
   if (!post) notFound();
 
   return (

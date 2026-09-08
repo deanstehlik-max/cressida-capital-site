@@ -7,7 +7,7 @@ import FaqJsonLd from '@/components/FaqJsonLd';
 import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
 import { propertyTypes, getPropertyType } from '@/lib/propertyTypes';
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 // Pre-renders every property type page at build time — same crawlability
 // as a static page, without seven near-duplicate files.
@@ -15,8 +15,9 @@ export function generateStaticParams() {
   return propertyTypes.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const type = getPropertyType(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const type = getPropertyType(slug);
   if (!type) return {};
 
   return {
@@ -26,8 +27,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function PropertyTypePage({ params }: Props) {
-  const type = getPropertyType(params.slug);
+export default async function PropertyTypePage({ params }: Props) {
+  const { slug } = await params;
+  const type = getPropertyType(slug);
   if (!type) notFound();
 
   return (
