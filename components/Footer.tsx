@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { brand } from '@/lib/brand';
 
 export default function Footer() {
@@ -7,7 +8,14 @@ export default function Footer() {
       <div className="max-w-[1180px] mx-auto px-8">
         <div className="grid grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-8">
           <div>
-            <span className="font-display text-lg block mb-2.5">{brand.displayName}</span>
+            <Image
+              src="/cressida-logo.svg"
+              alt="Cressida Capital"
+              width={640}
+              height={140}
+              className="h-9 w-auto mb-2.5"
+              style={{ width: 'auto', height: 36 }}
+            />
             <p className="text-grey max-w-[32ch]">
               Full-service commercial real estate debt advisory and direct
               lending. Nationwide financing, {brand.city} based.
