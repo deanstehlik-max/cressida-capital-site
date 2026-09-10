@@ -67,6 +67,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${plex.variable}`}>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-T8DC84JGQC"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T8DC84JGQC');`,
+          }}
+        />
+      </head>
       <body className="bg-paper text-ink font-sans antialiased">
         <OrganizationJsonLd />
         {children}
