@@ -23,11 +23,28 @@ structure baked in from the start.
 ## Getting started locally
 
 ```bash
+cp .env.local.example .env.local
 npm install
 npm run dev
 ```
 
 Open http://localhost:3000.
+
+## Environment variables
+
+Copy `.env.local.example` to `.env.local` and fill in server-side secrets.
+Never commit `.env.local`. Add the same keys in Railway's Variables tab for
+production.
+
+| Variable | Where it is used |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL (client + server). Already filled in the example. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/publishable key (insert-only via RLS). Already filled in the example. |
+| `RESEND_API_KEY` | Server-only. Sends a notification email to `deans@cressidacapital.com` after a successful loan-request insert. |
+| `GHL_PRIVATE_TOKEN` | Server-only GoHighLevel Private Integration token. Used to upsert a contact and Loan Pipeline opportunity. |
+| `GHL_LOCATION_ID` | Server-only. HighLevel API v2 requires `locationId` on `/contacts/upsert` and `/opportunities/upsert` even when the token is location-scoped. |
+
+`RESEND_API_KEY` and `GHL_PRIVATE_TOKEN` must not use a `NEXT_PUBLIC_` prefix.
 
 ## Pushing to GitHub
 
@@ -64,13 +81,16 @@ table editor, not through the public site.
 
 To run locally:
 1. Copy `.env.local.example` to `.env.local` (already has the correct
-   project URL and anon key filled in).
-2. `npm install` (now includes `@supabase/supabase-js`).
+   project URL and anon key filled in). Fill in `RESEND_API_KEY`,
+   `GHL_PRIVATE_TOKEN`, and `GHL_LOCATION_ID`.
+2. `npm install` (now includes `@supabase/supabase-js` and `resend`).
 3. `npm run dev` — the Contact page form at `/contact` will insert into
-   `loan_requests` on submit.
+   `loan_requests` on submit, email `deans@cressidacapital.com`, and
+   create a GoHighLevel contact + Loan Pipeline opportunity.
 
-Add the same two environment variables in Railway's Variables tab for
-production.
+Add the same environment variables in Railway's Variables tab for
+production. The visitor still sees a success response if email or GHL
+fails; the Supabase row is the source of truth.
 
 Tables still to add for the rest of the site:
 - `closings` — replaces the hardcoded array in
