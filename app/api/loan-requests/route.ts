@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase';
+import { sendLoanRequestEmail } from '@/lib/notifications/email';
+import { pushToGhl } from '@/lib/notifications/ghl';
+import type { LoanRequestNotification } from '@/lib/notifications/types';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -36,6 +39,32 @@ export async function POST(req: NextRequest) {
       { error: 'Something went wrong submitting your request. Please try again or call us directly.' },
       { status: 500 }
     );
+  }
+
+  const notification: LoanRequestNotification = {
+    fullName,
+    email,
+    phone,
+    company,
+    loanProgram,
+    propertyType,
+    loanAmount,
+    propertyCity,
+    propertyState,
+    message,
+    sourcePage,
+  };
+
+  const [emailResult, ghlResult] = await Promise.allSettled([
+    sendLoanRequestEmail(notification),
+    pushToGhl(notification),
+  ]);
+
+  if (emailResult.status === 'rejected') {
+    console.error('loan_requests email notification failed:', emailResult.reason);
+  }
+  if (ghlResult.status === 'rejected') {
+    console.error('loan_requests GHL notification failed:', ghlResult.reason);
   }
 
   return NextResponse.json({ success: true });
