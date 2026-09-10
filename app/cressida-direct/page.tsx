@@ -39,7 +39,7 @@ export default function CressidaDirectPage() {
 
         <dl className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-14 border-t border-b border-hair py-6">
           <Spec label="Loan Size" value={brand.stats.directLendingRange} />
-          <Spec label="Funding" value="Direct \u2014 in-house" />
+          <Spec label="Funding" value={"Direct \u2014 in-house"} />
           <Spec label="Coverage" value="Nationwide" />
           <Spec label="Documentation" value="Light doc options" />
         </dl>
