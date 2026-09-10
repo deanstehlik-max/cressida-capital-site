@@ -11,8 +11,8 @@ export default function Footer() {
             <Image
               src="/cressida-logo.svg"
               alt="Cressida Capital"
-              width={640}
-              height={140}
+              width={336}
+              height={79}
               className="h-9 w-auto mb-2.5"
               style={{ width: 'auto', height: 36 }}
             />

@@ -20,8 +20,8 @@ export default function Nav() {
           <Image
             src="/cressida-logo.svg"
             alt="Cressida Capital"
-            width={640}
-            height={140}
+            width={336}
+            height={79}
             className="h-9 w-auto"
             style={{ width: 'auto', height: 36 }}
             priority
