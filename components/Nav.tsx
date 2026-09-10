@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { brand } from '@/lib/brand';
+import Image from 'next/image';
 
 const links = [
   { href: '/about', label: 'About' },
@@ -14,10 +14,18 @@ const links = [
 
 export default function Nav() {
   return (
-    <header className="border-b border-hair bg-paper relative z-20">
+    <header className="sticky top-0 z-50 border-b border-hair bg-paper">
       <nav className="max-w-[1180px] mx-auto px-8 h-[78px] flex items-center justify-between">
-        <Link href="/" className="font-display text-[22px] font-semibold text-forest">
-          {brand.displayName}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/cressida-logo.svg"
+            alt="Cressida Capital"
+            width={640}
+            height={140}
+            className="h-9 w-auto"
+            style={{ width: 'auto', height: 36 }}
+            priority
+          />
         </Link>
         <div className="hidden lg:flex gap-[22px] text-[13.5px] text-slate">
           {links.map((link) => (

@@ -82,18 +82,20 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Full name" name="fullName" required />
         <Field label="Email" name="email" type="email" required />
-        <Field label="Phone" name="phone" type="tel" />
+        <Field label="Phone" name="phone" type="tel" required />
         <Field label="Company (optional)" name="company" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <SelectField label="Loan program" name="loanProgram">
+        <SelectField label="Loan program" name="loanProgram" required>
           <option value="">Select a program</option>
           {loanPrograms.map((p) => (
             <option key={p.slug} value={p.slug}>{p.name}</option>
           ))}
+          <option value="dscr-residential">DSCR - Residential</option>
+          <option value="dscr-commercial">DSCR - Commercial</option>
         </SelectField>
-        <SelectField label="Property type" name="propertyType">
+        <SelectField label="Property type" name="propertyType" required>
           <option value="">Select a property type</option>
           {propertyTypes.map((t) => (
             <option key={t} value={t}>{t}</option>
@@ -102,9 +104,9 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <Field label="Loan amount requested" name="loanAmount" type="number" placeholder="$" />
-        <Field label="Property city" name="propertyCity" />
-        <Field label="Property state" name="propertyState" placeholder="CA" />
+        <Field label="Loan amount requested" name="loanAmount" type="number" placeholder="$" required />
+        <Field label="Property city" name="propertyCity" required />
+        <Field label="Property state" name="propertyState" placeholder="CA" required />
       </div>
 
       <div>
@@ -115,6 +117,7 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
           id="message"
           name="message"
           rows={4}
+          required
           className="w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest"
         />
       </div>
@@ -167,10 +170,12 @@ function Field({
 function SelectField({
   label,
   name,
+  required,
   children,
 }: {
   label: string;
   name: string;
+  required?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -181,6 +186,7 @@ function SelectField({
       <select
         id={name}
         name={name}
+        required={required}
         className="w-full border border-hair px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-forest"
       >
         {children}
