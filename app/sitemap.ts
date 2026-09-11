@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/cressida-direct',
     '/transactions',
     '/insights',
+    '/insights/dscr-loan-rates',
     '/for-brokers',
     '/contact',
   ];
