@@ -16,7 +16,7 @@ const principles = [
   {
     name: 'Strategy',
     description:
-      'We provide multiple financing solutions to satisfy the individual needs of each client, rather than forcing every deal into a single lender\u2019s standard box.',
+      'We provide multiple financing solutions to satisfy the individual needs of each client, rather than forcing every deal into a single lender’s standard box.',
   },
   {
     name: 'Partnerships',
@@ -51,14 +51,14 @@ export default function AboutPage() {
           Drawing on {brand.yearsInBusiness}+ years of relationships across{' '}
           {brand.stats.lenderRelationships} banks, credit unions, and private
           capital sources, we deliver customized debt solutions for even the
-          most complex client needs \u2014 having arranged{' '}
+          most complex client needs — having arranged{' '}
           {brand.stats.financingArranged} in commercial real estate
           financing to date.
         </p>
 
         <section className="mb-16">
           <h2 className="font-display text-2xl font-medium mb-8">
-            How we work
+            How We Work
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-b border-hair py-8">
             {principles.map((p) => (
@@ -72,7 +72,19 @@ export default function AboutPage() {
 
         <section className="mb-16 max-w-[62ch]">
           <h2 className="font-display text-2xl font-medium mb-4">
-            Advisory and direct lending, under one roof
+            We Protect Our Brokers
+          </h2>
+          <p className="text-slate">
+            We know your relationships are your business. Cressida Capital
+            protects our brokers and referral sources on every deal — no
+            exceptions, no circumvention. When you bring us a client, that
+            relationship stays yours for the life of the deal and beyond.
+          </p>
+        </section>
+
+        <section className="mb-16 max-w-[62ch]">
+          <h2 className="font-display text-2xl font-medium mb-4">
+            Advisory and Direct Lending, Under One Roof
           </h2>
           <p className="text-slate mb-4">
             Cressida Capital operates two complementary businesses: a
@@ -91,13 +103,38 @@ export default function AboutPage() {
 
         <section className="max-w-[62ch]">
           <h2 className="font-display text-2xl font-medium mb-4">
-            Licensing
+            Ready to Discuss Your Deal?
           </h2>
-          <p className="text-slate">
-            {brand.legalName} is a licensed commercial real estate finance
-            brokerage and direct lender ({brand.license}), headquartered in{' '}
-            {brand.city}, {brand.region}.
+          <p className="text-slate mb-6">
+            Speak with a Cressida Loan Officer to explore your financing
+            options.
           </p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate mb-8">
+            <span>
+              Phone{' '}
+              <a
+                href={`tel:${brand.phone.replace(/[^\d]/g, '')}`}
+                className="font-medium hover:text-forest"
+              >
+                {brand.phone}
+              </a>
+            </span>
+            <span>
+              Email{' '}
+              <a
+                href={`mailto:${brand.email}`}
+                className="font-medium hover:text-forest"
+              >
+                {brand.email}
+              </a>
+            </span>
+          </div>
+          <Link
+            href="/contact"
+            className="inline-block px-6 py-3 text-sm font-medium bg-brass text-white"
+          >
+            Start a Loan Request
+          </Link>
         </section>
       </div>
 
