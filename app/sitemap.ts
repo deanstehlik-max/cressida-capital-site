@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/transactions',
     '/insights',
     '/insights/dscr-loan-rates',
+    '/insights/cre-debt-maturity-wall',
     '/for-brokers',
     '/contact',
   ];

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import FaqJsonLd from '@/components/FaqJsonLd';
@@ -267,6 +268,15 @@ export default function DscrLoanRatesPage() {
             This makes DSCR financing a strong fit for self-employed investors,
             portfolio landlords, and borrowers whose tax returns understate their
             actual cash flow.
+          </p>
+          <p className="text-slate text-sm mt-4">
+            Have a loan maturing soon?{' '}
+            <Link
+              href="/insights/cre-debt-maturity-wall"
+              className="text-forest underline"
+            >
+              See our guide to the 2026&ndash;2027 CRE debt maturity wall &rarr;
+            </Link>
           </p>
         </section>
 
