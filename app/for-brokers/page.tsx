@@ -53,10 +53,22 @@ export default function ForBrokersPage() {
         </h1>
         <p className="text-lg text-slate max-w-[60ch] mb-12">
           Refer a commercial real estate financing deal to Cressida Capital
-          and we handle underwriting, lender placement, and closing \u2014
+          and we handle underwriting, lender placement, and closing —
           co-broker and stay involved, or step back once the introduction is
           made.
         </p>
+
+        <section className="mb-16 max-w-[62ch]">
+          <h2 className="font-display text-2xl font-medium mb-4">
+            We Protect Our Brokers
+          </h2>
+          <p className="text-slate">
+            We know your relationships are your business. Cressida Capital
+            protects our brokers and referral sources on every deal — no
+            exceptions, no circumvention. When you bring us a client, that
+            relationship stays yours for the life of the deal and beyond.
+          </p>
+        </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16">
           <section>
