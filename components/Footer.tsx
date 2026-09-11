@@ -44,6 +44,7 @@ export default function Footer() {
             links={[
               { href: '/cressida-direct', label: 'Cressida Direct' },
               { href: '/insights', label: 'Insights' },
+              { href: '/insights/dscr-loan-rates', label: 'DSCR Loan Rates' },
               { href: '/for-brokers', label: 'For Brokers' },
               { href: brand.social.linkedin, label: 'LinkedIn' },
             ]}
