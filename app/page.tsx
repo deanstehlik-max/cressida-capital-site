@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { brand } from '@/lib/brand';
 import { getClosings } from '@/lib/closings';
 import { getPublishedInsights } from '@/lib/insights';
+import { guides } from '@/lib/guides';
 
 export const metadata: Metadata = {
   title: 'Commercial Real Estate Financing Nationwide',
@@ -22,6 +23,19 @@ export default async function HomePage() {
     getPublishedInsights(1),
   ]);
   const latestInsight = insights[0];
+
+  // Prefer a real published Supabase post. When none exist yet, fall back to
+  // the newest static guide (guides[0]) so the widget still surfaces real
+  // content instead of a placeholder. Once any Supabase post is published,
+  // the Supabase-first branch takes over automatically.
+  const featured = latestInsight
+    ? {
+        category: latestInsight.category,
+        title: latestInsight.title,
+        dek: latestInsight.dek,
+        href: `/insights/${latestInsight.slug}`,
+      }
+    : guides[0] ?? null;
 
   return (
     <>
@@ -44,15 +58,15 @@ export default async function HomePage() {
             <div className="border-b border-ink pb-4 mb-2">
               <h2 className="font-display text-2xl font-medium">Latest Insight</h2>
             </div>
-            {latestInsight ? (
+            {featured ? (
               <div className="border-t border-ink pt-5">
-                <div className="text-xs text-grey mb-2.5">{latestInsight.category}</div>
+                <div className="text-xs text-grey mb-2.5">{featured.category}</div>
                 <h3 className="font-display text-[21px] font-medium leading-tight mb-3">
-                  {latestInsight.title}
+                  {featured.title}
                 </h3>
-                <p className="text-slate text-sm max-w-[38ch]">{latestInsight.dek}</p>
+                <p className="text-slate text-sm max-w-[38ch]">{featured.dek}</p>
                 <a
-                  href={`/insights/${latestInsight.slug}`}
+                  href={featured.href}
                   className="inline-block mt-3.5 text-[13px] border-b border-ink"
                 >
                   Read the note
