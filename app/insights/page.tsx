@@ -16,6 +16,12 @@ export const metadata: Metadata = {
 // insights_posts table. Rendered above any published posts.
 const guides = [
   {
+    href: '/insights/cre-debt-maturity-wall',
+    category: 'Guide',
+    title: 'The CRE Debt Maturity Wall',
+    dek: 'A historic volume of commercial real estate debt matures in 2026 and 2027. What owners need to know before refinancing \u2014 and the loan paths worth evaluating.',
+  },
+  {
     href: '/insights/dscr-loan-rates',
     category: 'Guide',
     title: 'DSCR Loan Rates & Qualification',

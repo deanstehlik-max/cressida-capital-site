@@ -45,6 +45,7 @@ export default function Footer() {
               { href: '/cressida-direct', label: 'Cressida Direct' },
               { href: '/insights', label: 'Insights' },
               { href: '/insights/dscr-loan-rates', label: 'DSCR Loan Rates' },
+              { href: '/insights/cre-debt-maturity-wall', label: 'CRE Debt Maturity Wall' },
               { href: '/for-brokers', label: 'For Brokers' },
               { href: brand.social.linkedin, label: 'LinkedIn' },
             ]}
