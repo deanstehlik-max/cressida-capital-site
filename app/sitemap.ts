@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/insights/cre-debt-maturity-wall',
     '/for-brokers',
     '/contact',
+    '/start-a-loan-request',
   ];
 
   const dynamicRoutes = [
