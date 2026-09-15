@@ -43,6 +43,8 @@ production.
 | `RESEND_API_KEY` | Server-only. Sends a notification email to `deans@cressidacapital.com` after a successful loan-request insert. |
 | `GHL_PRIVATE_TOKEN` | Server-only GoHighLevel Private Integration token. Used to upsert a contact and Loan Pipeline opportunity. |
 | `GHL_LOCATION_ID` | Server-only. HighLevel API v2 requires `locationId` on `/contacts/upsert` and `/opportunities/upsert` even when the token is location-scoped. |
+| `GHL_PIPELINE_ID` | Server-only, **optional**. Overrides the opportunity pipeline for the dedicated `/start-a-loan-request` flow only. Unset → falls back to the default pipeline. |
+| `GHL_STAGE_INITIAL_INQUIRY` | Server-only, **optional**. Pipeline stage ("Initial Inquiry") for opportunities created by the `/start-a-loan-request` flow only. Unset → falls back to the default stage. |
 
 `RESEND_API_KEY` and `GHL_PRIVATE_TOKEN` must not use a `NEXT_PUBLIC_` prefix.
 

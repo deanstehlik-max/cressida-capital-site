@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase';
 import { sendLoanRequestEmail } from '@/lib/notifications/email';
-import { pushToGhl } from '@/lib/notifications/ghl';
+import { pushToGhl, ghlOverridesForSourcePage } from '@/lib/notifications/ghl';
 import type { LoanRequestNotification } from '@/lib/notifications/types';
 
 export async function POST(req: NextRequest) {
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
   const [emailResult, ghlResult] = await Promise.allSettled([
     sendLoanRequestEmail(notification),
-    pushToGhl(notification),
+    pushToGhl(notification, ghlOverridesForSourcePage(sourcePage)),
   ]);
 
   if (emailResult.status === 'rejected') {

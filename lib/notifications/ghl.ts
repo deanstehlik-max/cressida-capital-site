@@ -4,6 +4,38 @@ const GHL_BASE_URL = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
 const PIPELINE_ID = 'NQo4sCCwKDAZECy7Kunn';
 const PIPELINE_STAGE_ID = '4c1b5924-2b5e-4f4b-baf4-78a8d5ee97e7';
+const DEFAULT_SOURCE = 'cressidacapital.com website';
+
+// Path of the dedicated "Start a Loan Request" page/flow. Submissions tagged
+// with this source page get their own GHL source label and (optionally) a
+// distinct pipeline/stage so the leads can be attributed separately.
+export const START_A_LOAN_REQUEST_PATH = '/start-a-loan-request';
+
+// Optional per-flow overrides for the GHL contact source and the opportunity
+// pipeline/stage. Anything left undefined falls back to the defaults above,
+// preserving today's behavior.
+export type GhlPushOverrides = {
+  source?: string;
+  pipelineId?: string;
+  pipelineStageId?: string;
+};
+
+// Maps a submission's sourcePage to the GHL overrides it should use. Unknown
+// pages return no overrides, so pushToGhl keeps its default behavior.
+export function ghlOverridesForSourcePage(
+  sourcePage?: string | null
+): GhlPushOverrides {
+  if (sourcePage === START_A_LOAN_REQUEST_PATH) {
+    return {
+      source: 'Website - Start A Loan Request',
+      // Land these in the "Initial Inquiry" stage when configured. When the
+      // env vars are unset we fall back to today's default pipeline/stage.
+      pipelineId: process.env.GHL_PIPELINE_ID || undefined,
+      pipelineStageId: process.env.GHL_STAGE_INITIAL_INQUIRY || undefined,
+    };
+  }
+  return {};
+}
 
 function splitName(fullName: string): { firstName: string; lastName: string } {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
@@ -66,9 +98,16 @@ type GhlOpportunityUpsertResponse = {
   opportunity?: { id?: string };
 };
 
-export async function pushToGhl(data: LoanRequestNotification) {
+export async function pushToGhl(
+  data: LoanRequestNotification,
+  overrides: GhlPushOverrides = {}
+) {
   const token = process.env.GHL_PRIVATE_TOKEN;
   const locationId = process.env.GHL_LOCATION_ID;
+
+  const source = overrides.source || DEFAULT_SOURCE;
+  const pipelineId = overrides.pipelineId || PIPELINE_ID;
+  const pipelineStageId = overrides.pipelineStageId || PIPELINE_STAGE_ID;
 
   if (!token) {
     throw new Error('Missing GHL_PRIVATE_TOKEN environment variable.');
@@ -88,7 +127,7 @@ export async function pushToGhl(data: LoanRequestNotification) {
     email: data.email,
     ...(data.phone ? { phone: data.phone } : {}),
     ...(data.company ? { companyName: data.company } : {}),
-    source: 'cressidacapital.com website',
+    source,
     locationId,
   });
 
@@ -106,8 +145,8 @@ export async function pushToGhl(data: LoanRequestNotification) {
     '/opportunities/upsert',
     token,
     {
-      pipelineId: PIPELINE_ID,
-      pipelineStageId: PIPELINE_STAGE_ID,
+      pipelineId,
+      pipelineStageId,
       contactId,
       locationId,
       name: opportunityName,
