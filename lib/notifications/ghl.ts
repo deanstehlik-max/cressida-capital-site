@@ -6,6 +6,11 @@ const PIPELINE_ID = 'NQo4sCCwKDAZECy7Kunn';
 const PIPELINE_STAGE_ID = '4c1b5924-2b5e-4f4b-baf4-78a8d5ee97e7';
 const DEFAULT_SOURCE = 'cressidacapital.com website';
 
+// HighLevel location custom-field ids. These fields must already exist in the
+// location; the v2 /contacts/upsert body keys them by field id.
+const CUSTOM_FIELD_LOAN_AMOUNT_ID = 'jVwwaLdqvjvDM8OOoClc';
+const CUSTOM_FIELD_PROPERTY_TYPE_ID = 'dRHzwzTt0urRF00X3Hvd';
+
 // Path of the dedicated "Start a Loan Request" page/flow. Submissions tagged
 // with this source page get their own GHL source label and (optionally) a
 // distinct pipeline/stage so the leads can be attributed separately.
@@ -120,6 +125,20 @@ export async function pushToGhl(
   }
 
   const { firstName, lastName } = splitName(data.fullName);
+  const monetaryValue = parseMonetaryValue(data.loanAmount);
+
+  // Populate the location's Loan Amount / Property Type custom fields when we
+  // have values. Loan Amount uses the sanitized numeric value (falling back to
+  // the raw input) so a numeric/monetary field type isn't rejected.
+  const customFields: Array<{ id: string; field_value: string | number }> = [];
+  if (monetaryValue !== undefined) {
+    customFields.push({ id: CUSTOM_FIELD_LOAN_AMOUNT_ID, field_value: monetaryValue });
+  } else if (data.loanAmount != null && data.loanAmount !== '') {
+    customFields.push({ id: CUSTOM_FIELD_LOAN_AMOUNT_ID, field_value: String(data.loanAmount) });
+  }
+  if (data.propertyType) {
+    customFields.push({ id: CUSTOM_FIELD_PROPERTY_TYPE_ID, field_value: data.propertyType });
+  }
 
   const contactResult = await ghlFetch<GhlContactUpsertResponse>('/contacts/upsert', token, {
     firstName,
@@ -129,6 +148,7 @@ export async function pushToGhl(
     ...(data.company ? { companyName: data.company } : {}),
     source,
     locationId,
+    ...(customFields.length ? { customFields } : {}),
   });
 
   const contactId = contactResult.contact?.id;
@@ -138,7 +158,6 @@ export async function pushToGhl(
     );
   }
 
-  const monetaryValue = parseMonetaryValue(data.loanAmount);
   const opportunityName = `${data.fullName} \u2014 ${data.loanProgram || 'General Inquiry'}`;
 
   const opportunityResult = await ghlFetch<GhlOpportunityUpsertResponse>(
