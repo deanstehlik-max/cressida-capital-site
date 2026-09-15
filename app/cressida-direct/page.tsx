@@ -97,7 +97,7 @@ export default function CressidaDirectPage() {
             Visit Cressida Direct
           </a>
           <Link
-            href="/contact"
+            href="/start-a-loan-request"
             className="inline-block px-6 py-3 text-sm font-medium border border-brass text-brass"
           >
             Start a Loan Request

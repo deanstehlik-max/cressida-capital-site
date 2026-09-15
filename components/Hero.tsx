@@ -27,7 +27,7 @@ export default function Hero() {
           </p>
           <div className="mt-8 flex gap-[14px] flex-wrap">
             <Link
-              href="/contact"
+              href="/start-a-loan-request"
               className="inline-block px-5 py-[11px] text-[13.5px] font-medium bg-brass border border-brass text-white hover:bg-transparent hover:text-brass transition-colors"
             >
               Start a Loan Request

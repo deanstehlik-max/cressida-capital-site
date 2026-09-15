@@ -100,7 +100,7 @@ export default async function HomePage() {
             A Cressida Loan Officer &middot; {brand.phone} &middot; {brand.email}
           </div>
           <a
-            href="/contact"
+            href="/start-a-loan-request"
             className="inline-block px-5 py-[11px] text-[13.5px] font-medium bg-brass border border-brass text-white"
           >
             Start a Loan Request

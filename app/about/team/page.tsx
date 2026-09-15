@@ -69,7 +69,7 @@ export default function TeamPage() {
             {brand.email}, or start a request online.
           </p>
           <a
-            href="/contact"
+            href="/start-a-loan-request"
             className="inline-block px-6 py-3 text-sm font-medium bg-brass text-white"
           >
             Start a Loan Request
