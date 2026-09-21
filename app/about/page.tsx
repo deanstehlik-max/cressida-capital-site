@@ -8,7 +8,7 @@ import { brand } from '@/lib/brand';
 export const metadata: Metadata = {
   title: 'About Cressida Capital',
   description:
-    'Cressida Capital is a full-service commercial real estate finance advisory firm and direct lender, founded in 2013, with $800M+ in financing arranged nationwide.',
+    'Cressida Capital is a full-service commercial real estate finance advisory firm, founded in 2013, with $800M+ in financing arranged nationwide.',
   alternates: { canonical: '/about' },
 };
 
@@ -47,7 +47,7 @@ export default function AboutPage() {
         </h1>
         <p className="text-lg text-slate max-w-[62ch] mb-14">
           Cressida Capital is a full-service commercial real estate finance
-          advisory firm and direct lender, founded in {brand.founded}.
+          advisory firm, founded in {brand.founded}.
           Drawing on {brand.yearsInBusiness}+ years of relationships across{' '}
           {brand.stats.lenderRelationships} banks, credit unions, and private
           capital sources, we deliver customized debt solutions for even the
