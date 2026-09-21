@@ -162,25 +162,6 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="mb-16 max-w-[62ch]">
-          <h2 className="font-display text-2xl font-medium mb-4">
-            Advisory and Direct Lending, Under One Roof
-          </h2>
-          <p className="text-slate mb-4">
-            Cressida Capital operates two complementary businesses: a
-            full-service mortgage advisory practice that shops each deal
-            across our network of {brand.stats.lenderRelationships} lender
-            relationships to find the most competitive terms available, and
-            Cressida Direct, our nationwide direct lending platform funding
-            small-balance commercial real estate loans from{' '}
-            {brand.stats.directLendingRange} without a third-party bank in
-            the middle.
-          </p>
-          <Link href="/cressida-direct" className="text-sm text-forest border-b border-forest pb-0.5">
-            Learn about Cressida Direct
-          </Link>
-        </section>
-
         <section className="max-w-[62ch]">
           <h2 className="font-display text-2xl font-medium mb-4">
             Ready to Discuss Your Deal?
