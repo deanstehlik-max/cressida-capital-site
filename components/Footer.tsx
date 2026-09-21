@@ -17,8 +17,8 @@ export default function Footer() {
               style={{ width: 'auto', height: 36 }}
             />
             <p className="text-grey max-w-[32ch]">
-              Full-service commercial real estate debt advisory and direct
-              lending. Nationwide financing, {brand.city} based.
+              Full-service commercial real estate debt advisory. Nationwide
+              financing, {brand.city} based.
             </p>
           </div>
           <FooterCol

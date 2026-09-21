@@ -36,7 +36,7 @@ export default function Hero() {
               href="/contact"
               className="inline-block px-5 py-[11px] text-[13.5px] font-medium border border-brass-light text-brass-light hover:bg-brass-light hover:text-forest-dark transition-colors"
             >
-              Speak with a Loan Officer
+              Speak with a Mortgage Advisor
             </Link>
           </div>
           <div className="mt-[26px] text-xs text-[#8FA098]">
