@@ -12,6 +12,47 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about' },
 };
 
+const whatWeDo = [
+  {
+    name: 'Evaluate Your Financing Needs',
+    description:
+      'We review the property, cash flow, borrower qualifications, credit profile, and transaction objectives to determine the appropriate financing strategy.',
+  },
+  {
+    name: 'Identify the Right Loan Program',
+    description: 'We provide access to a range of financing options, including:',
+    list: [
+      'Commercial real estate loans',
+      'SBA 7(a) and SBA 504 loans',
+      'Bridge and private-money loans',
+      'DSCR loans',
+      'Construction financing',
+      'Owner-user and investment property loans',
+      'Refinancing and cash-out loans',
+    ],
+  },
+  {
+    name: 'Access Multiple Lending Sources',
+    description:
+      'We work with banks, credit unions, private lenders, and non-bank financial institutions to identify competitive options for each transaction.',
+  },
+  {
+    name: 'Structure and Present Your Loan',
+    description:
+      'We prepare and professionally present your financing request to appropriate lenders, clearly highlighting the strengths of the transaction.',
+  },
+  {
+    name: 'Negotiate Competitive Terms',
+    description:
+      'We negotiate key terms, including interest rate, loan amount, amortization, recourse, fees, and prepayment provisions.',
+  },
+  {
+    name: 'Manage the Closing Process',
+    description:
+      'We coordinate with the borrower, lender, appraiser, title company, insurance provider, and other parties to keep the transaction moving through closing.',
+  },
+];
+
 const principles = [
   {
     name: 'Strategy',
@@ -55,6 +96,45 @@ export default function AboutPage() {
           {brand.stats.financingArranged} in commercial real estate
           financing to date.
         </p>
+
+        <section className="mb-16 max-w-[62ch]">
+          <h2 className="font-display text-2xl font-medium mb-1">
+            Your Trusted Commercial Mortgage Advisor
+          </h2>
+          <p className="text-sm text-grey mb-4">
+            Financing Expertise. Lender Access. Guidance From Start to Finish.
+          </p>
+          <p className="text-slate mb-6">
+            Cressida Capital helps real estate investors and business owners
+            identify, structure, and secure financing that supports their
+            goals. We represent our clients throughout the entire process—from
+            the initial evaluation through underwriting and closing.
+          </p>
+          <Link href="/start-a-loan-request" className="inline-block px-6 py-3 text-sm font-medium bg-brass text-white">
+            Discuss Your Financing Needs
+          </Link>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="font-display text-2xl font-medium mb-8">
+            What We Do
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 border-t border-b border-hair py-8">
+            {whatWeDo.map((item) => (
+              <div key={item.name}>
+                <h3 className="font-display text-lg font-medium mb-2">{item.name}</h3>
+                <p className="text-sm text-slate">{item.description}</p>
+                {item.list && (
+                  <ul className="mt-2 text-sm text-slate list-disc list-inside space-y-1">
+                    {item.list.map((entry) => (
+                      <li key={entry}>{entry}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="mb-16">
           <h2 className="font-display text-2xl font-medium mb-8">
