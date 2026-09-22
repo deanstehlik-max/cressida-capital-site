@@ -13,7 +13,7 @@ import { guides } from '@/lib/guides';
 export const metadata: Metadata = {
   title: 'Commercial Real Estate Financing Nationwide',
   description:
-    'Cressida Capital arranges bridge, SBA, construction, multifamily, and CMBS financing for commercial real estate nationwide, plus direct lending from $200K to $3M.',
+    'Cressida Capital arranges bridge, SBA, construction, multifamily, and CMBS financing for commercial real estate nationwide, plus direct lending from $200K to $3M through Cressida Direct.',
   alternates: { canonical: '/' },
 };
 
