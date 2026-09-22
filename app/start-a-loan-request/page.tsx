@@ -41,7 +41,9 @@ export default function StartALoanRequestPage() {
           </div>
         </div>
 
-        <LoanRequestForm sourcePage="/start-a-loan-request" />
+        <div className="border border-hair bg-white p-8 lg:p-10">
+          <LoanRequestForm sourcePage="/start-a-loan-request" />
+        </div>
       </div>
 
       <Footer />

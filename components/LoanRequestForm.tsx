@@ -104,7 +104,7 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <Field label="Loan amount requested" name="loanAmount" type="number" placeholder="$" required />
+        <Field label="Loan amount requested" name="loanAmount" type="number" prefix="$" required />
         <Field label="Property city" name="propertyCity" required />
         <Field label="Property state" name="propertyState" placeholder="CA" required />
       </div>
@@ -118,7 +118,7 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
           name="message"
           rows={4}
           required
-          className="w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest"
+          className="w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:py-[9px]"
         />
       </div>
 
@@ -129,7 +129,7 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="px-6 py-3 text-sm font-medium bg-brass text-white disabled:opacity-60"
+        className="px-6 py-3 text-sm font-medium bg-brass text-white disabled:opacity-60 hover:opacity-90 transition-opacity"
       >
         {status === 'submitting' ? 'Submitting\u2026' : 'Submit Loan Request'}
       </button>
@@ -143,26 +143,37 @@ function Field({
   type = 'text',
   required,
   placeholder,
+  prefix,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
   placeholder?: string;
+  prefix?: string;
 }) {
   return (
     <div>
       <label className="block text-[13px] font-medium mb-1.5" htmlFor={name}>
         {label}
       </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        className="w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest"
-      />
+      <div className="relative">
+        {prefix && (
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-grey text-sm pointer-events-none">
+            {prefix}
+          </span>
+        )}
+        <input
+          id={name}
+          name={name}
+          type={type}
+          required={required}
+          placeholder={placeholder}
+          className={`w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:py-[9px] ${
+            prefix ? 'pl-6 focus:pl-[23px]' : ''
+          }`}
+        />
+      </div>
     </div>
   );
 }
@@ -183,14 +194,26 @@ function SelectField({
       <label className="block text-[13px] font-medium mb-1.5" htmlFor={name}>
         {label}
       </label>
-      <select
-        id={name}
-        name={name}
-        required={required}
-        className="w-full border border-hair px-3 py-2.5 text-sm bg-white focus:outline-none focus:border-forest"
-      >
-        {children}
-      </select>
+      <div className="relative">
+        <select
+          id={name}
+          name={name}
+          required={required}
+          className="w-full appearance-none border border-hair px-3 py-2.5 pr-8 text-sm bg-white focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:pr-[31px] focus:py-[9px]"
+        >
+          {children}
+        </select>
+        <svg
+          className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path d="M1 3l4 4 4-4" stroke="#8A928E" strokeWidth="1.5" fill="none" />
+        </svg>
+      </div>
     </div>
   );
 }
