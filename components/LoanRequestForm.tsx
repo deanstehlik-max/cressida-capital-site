@@ -17,7 +17,15 @@ const propertyTypes = [
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
-export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePage?: string }) {
+type Variant = 'boxed' | 'underline';
+
+export default function LoanRequestForm({
+  sourcePage = '/contact',
+  variant = 'boxed',
+}: {
+  sourcePage?: string;
+  variant?: Variant;
+}) {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -80,14 +88,14 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-[640px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Full name" name="fullName" required />
-        <Field label="Email" name="email" type="email" required />
-        <Field label="Phone" name="phone" type="tel" required />
-        <Field label="Company (optional)" name="company" />
+        <Field label="Full name" name="fullName" required variant={variant} />
+        <Field label="Email" name="email" type="email" required variant={variant} />
+        <Field label="Phone" name="phone" type="tel" required variant={variant} />
+        <Field label="Company (optional)" name="company" variant={variant} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <SelectField label="Loan program" name="loanProgram" required>
+        <SelectField label="Loan program" name="loanProgram" required variant={variant}>
           <option value="">Select a program</option>
           {loanPrograms.map((p) => (
             <option key={p.slug} value={p.slug}>{p.name}</option>
@@ -95,7 +103,7 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
           <option value="dscr-residential">DSCR - Residential</option>
           <option value="dscr-commercial">DSCR - Commercial</option>
         </SelectField>
-        <SelectField label="Property type" name="propertyType" required>
+        <SelectField label="Property type" name="propertyType" required variant={variant}>
           <option value="">Select a property type</option>
           {propertyTypes.map((t) => (
             <option key={t} value={t}>{t}</option>
@@ -104,9 +112,9 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <Field label="Loan amount requested" name="loanAmount" type="number" prefix="$" required />
-        <Field label="Property city" name="propertyCity" required />
-        <Field label="Property state" name="propertyState" placeholder="CA" required />
+        <Field label="Loan amount requested" name="loanAmount" type="number" prefix="$" required variant={variant} />
+        <Field label="Property city" name="propertyCity" required variant={variant} />
+        <Field label="Property state" name="propertyState" placeholder="CA" required variant={variant} />
       </div>
 
       <div>
@@ -118,7 +126,11 @@ export default function LoanRequestForm({ sourcePage = '/contact' }: { sourcePag
           name="message"
           rows={4}
           required
-          className="w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:py-[9px]"
+          className={
+            variant === 'underline'
+              ? 'field-underline resize-none'
+              : 'w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:py-[9px]'
+          }
         />
       </div>
 
@@ -144,6 +156,7 @@ function Field({
   required,
   placeholder,
   prefix,
+  variant = 'boxed',
 }: {
   label: string;
   name: string;
@@ -151,7 +164,14 @@ function Field({
   required?: boolean;
   placeholder?: string;
   prefix?: string;
+  variant?: Variant;
 }) {
+  const isUnderline = variant === 'underline';
+  const inputClass = isUnderline
+    ? `field-underline ${prefix ? 'pl-4' : ''}`
+    : `w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:py-[9px] ${
+        prefix ? 'pl-6 focus:pl-[23px]' : ''
+      }`;
   return (
     <div>
       <label className="block text-[13px] font-medium mb-1.5" htmlFor={name}>
@@ -159,7 +179,11 @@ function Field({
       </label>
       <div className="relative">
         {prefix && (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-grey text-sm pointer-events-none">
+          <span
+            className={`absolute ${
+              isUnderline ? 'left-0' : 'left-3'
+            } top-1/2 -translate-y-1/2 text-grey text-sm pointer-events-none`}
+          >
             {prefix}
           </span>
         )}
@@ -169,9 +193,7 @@ function Field({
           type={type}
           required={required}
           placeholder={placeholder}
-          className={`w-full border border-hair px-3 py-2.5 text-sm focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:py-[9px] ${
-            prefix ? 'pl-6 focus:pl-[23px]' : ''
-          }`}
+          className={inputClass}
         />
       </div>
     </div>
@@ -183,12 +205,18 @@ function SelectField({
   name,
   required,
   children,
+  variant = 'boxed',
 }: {
   label: string;
   name: string;
   required?: boolean;
   children: React.ReactNode;
+  variant?: Variant;
 }) {
+  const isUnderline = variant === 'underline';
+  const selectClass = isUnderline
+    ? 'field-underline appearance-none pr-6'
+    : 'w-full appearance-none border border-hair px-3 py-2.5 pr-8 text-sm bg-white focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:pr-[31px] focus:py-[9px]';
   return (
     <div>
       <label className="block text-[13px] font-medium mb-1.5" htmlFor={name}>
@@ -199,12 +227,14 @@ function SelectField({
           id={name}
           name={name}
           required={required}
-          className="w-full appearance-none border border-hair px-3 py-2.5 pr-8 text-sm bg-white focus:outline-none focus:border-forest focus:border-2 focus:px-[11px] focus:pr-[31px] focus:py-[9px]"
+          className={selectClass}
         >
           {children}
         </select>
         <svg
-          className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+          className={`absolute ${
+            isUnderline ? 'right-0' : 'right-3'
+          } top-1/2 -translate-y-1/2 pointer-events-none`}
           width="10"
           height="10"
           viewBox="0 0 10 10"

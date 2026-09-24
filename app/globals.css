@@ -9,6 +9,55 @@
   }
 }
 
+@layer components {
+  /* Underline-style form fields: transparent background, single bottom
+     border, square corners. Used on the Contact page's document-style form. */
+  .field-underline {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1.5px solid theme('colors.hair');
+    border-radius: 0;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    color: theme('colors.ink');
+    transition: border-color 0.15s ease;
+  }
+  .field-underline::placeholder {
+    color: theme('colors.grey');
+  }
+  .field-underline:focus {
+    outline: none;
+    border-bottom-color: theme('colors.brass');
+  }
+
+  /* Dotted-leader ledger row: label on the left, dotted line filling the
+     middle, value bold on the right (like an old accounting ledger). */
+  .ledger-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .ledger-row__label {
+    flex: 0 0 auto;
+    color: theme('colors.grey');
+    white-space: nowrap;
+  }
+  .ledger-row__leader {
+    flex: 1 1 auto;
+    align-self: flex-end;
+    height: 0.55em;
+    border-bottom: 1.5px dotted theme('colors.grey');
+    transform: translateY(-0.1em);
+  }
+  .ledger-row__value {
+    flex: 0 0 auto;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
 .prose-cressida p {
   margin-bottom: 1.25em;
   color: #3E4A47;
