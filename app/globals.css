@@ -45,8 +45,10 @@
   }
   .ledger-row__leader {
     flex: 1 1 auto;
-    border-bottom: 1px dotted theme('colors.hair');
-    transform: translateY(-0.28em);
+    align-self: flex-end;
+    height: 0.55em;
+    border-bottom: 1.5px dotted theme('colors.grey');
+    transform: translateY(-0.1em);
   }
   .ledger-row__value {
     flex: 0 0 auto;
