@@ -9,80 +9,78 @@
   }
 }
 
-@layer components {
- cursor/redesign-transactions-page-a9b5
-  /* Transaction ledger row: 4-column grid (Type / Deal / Location / Amount).
-     Collapses to 3 columns below 880px, where the Location cell is hidden. */
+/* Transaction ledger row: 4-column grid (Type / Deal / Location / Amount).
+   Collapses to 3 columns below 880px, where the Location cell is hidden. */
+.txn-row {
+  display: grid;
+  grid-template-columns: 132px 1fr 96px;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+@media (min-width: 880px) {
   .txn-row {
-    display: grid;
-    grid-template-columns: 132px 1fr 96px;
-    gap: 0.75rem;
-    align-items: baseline;
+    grid-template-columns: 150px 1fr 180px 140px;
+    gap: 1rem;
   }
-  @media (min-width: 880px) {
-    .txn-row {
-      grid-template-columns: 150px 1fr 180px 140px;
-      gap: 1rem;
-    }
-  }
+}
 
-  /* Bordered type tag in brand forest green, square corners. */
-  .txn-tag {
-    display: inline-block;
-    width: fit-content;
-    border: 1px solid theme('colors.forest');
-    color: theme('colors.forest');
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    padding: 2px 7px;
-  /* Underline-style form fields: transparent background, single bottom
-     border, square corners. Used on the Contact page's document-style form. */
-  .field-underline {
-    width: 100%;
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1.5px solid theme('colors.hair');
-    border-radius: 0;
-    padding: 0.5rem 0;
-    font-size: 0.875rem;
-    color: theme('colors.ink');
-    transition: border-color 0.15s ease;
-  }
-  .field-underline::placeholder {
-    color: theme('colors.grey');
-  }
-  .field-underline:focus {
-    outline: none;
-    border-bottom-color: theme('colors.brass');
-  }
+/* Bordered type tag in brand forest green, square corners. */
+.txn-tag {
+  display: inline-block;
+  width: fit-content;
+  border: 1px solid theme('colors.forest');
+  color: theme('colors.forest');
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+}
 
-  /* Dotted-leader ledger row: label on the left, dotted line filling the
-     middle, value bold on the right (like an old accounting ledger). */
-  .ledger-row {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-  }
-  .ledger-row__label {
-    flex: 0 0 auto;
-    color: theme('colors.grey');
-    white-space: nowrap;
-  }
-  .ledger-row__leader {
-    flex: 1 1 auto;
-    align-self: flex-end;
-    height: 0.55em;
-    border-bottom: 1.5px dotted theme('colors.grey');
-    transform: translateY(-0.1em);
-  }
-  .ledger-row__value {
-    flex: 0 0 auto;
-    font-weight: 600;
-    text-align: right;
-    white-space: nowrap;
- main
-  }
+/* Underline-style form fields: transparent background, single bottom
+   border, square corners. Used on the Contact page's document-style form. */
+.field-underline {
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1.5px solid theme('colors.hair');
+  border-radius: 0;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: theme('colors.ink');
+  transition: border-color 0.15s ease;
+}
+.field-underline::placeholder {
+  color: theme('colors.grey');
+}
+.field-underline:focus {
+  outline: none;
+  border-bottom-color: theme('colors.brass');
+}
+
+/* Dotted-leader ledger row: label on the left, dotted line filling the
+   middle, value bold on the right (like an old accounting ledger). */
+.ledger-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.ledger-row__label {
+  flex: 0 0 auto;
+  color: theme('colors.grey');
+  white-space: nowrap;
+}
+.ledger-row__leader {
+  flex: 1 1 auto;
+  align-self: flex-end;
+  height: 0.55em;
+  border-bottom: 1.5px dotted theme('colors.grey');
+  transform: translateY(-0.1em);
+}
+.ledger-row__value {
+  flex: 0 0 auto;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .prose-cressida p {
