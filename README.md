@@ -129,10 +129,14 @@ Done:
 - About page (`app/about/page.tsx`) and Team page (`app/about/team/page.tsx`)
   — team is described by role, not named individuals.
 - Transactions page (`app/transactions/page.tsx`) and the homepage's
-  Recent Closings section both now read from a live `closings` table in
-  Supabase (`lib/closings.ts`) instead of a hardcoded array. Seeded with
-  the 4 real closings from the original site. Add new deals via the
-  Supabase dashboard's table editor — no code deploy required.
+  Recent Closings section both read published rows from the `closings`
+  table in Supabase (`lib/closings.ts`), seeded with the 4 real closings
+  from the original site. Additional closings kept in `repoClosings` in
+  that file are merged in (newest `closed_on` first) so a deal can ship
+  with the site when it is not in Supabase yet. The anon key cannot insert
+  into `closings`. Prefer the Supabase table editor for later deals; a row
+  with the same id or the same program, title, and city/state replaces the
+  repo copy.
 - Insights listing (`app/insights/page.tsx`) and post pages
   (`app/insights/[slug]/page.tsx`, revalidated hourly since posts live in
   Supabase, not the codebase) with Article JSON-LD, reading from a new
