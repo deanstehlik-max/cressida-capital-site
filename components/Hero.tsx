@@ -1,16 +1,10 @@
 import Link from 'next/link';
 import { brand } from '@/lib/brand';
+import { getBenchmarkRates } from '@/lib/rates';
 
-// Rates should be wired to a real data source (a small API route + cron,
-// or a scheduled edge function) rather than hardcoded before launch.
-const rates = [
-  { label: 'Prime Rate', value: '6.75%' },
-  { label: 'SOFR (30-day avg)', value: '3.65%' },
-  { label: '5-Year Treasury', value: '4.54%', up: true },
-  { label: '10-Year Treasury', value: '4.78%' },
-];
+export default async function Hero() {
+  const { rates, asOf } = await getBenchmarkRates();
 
-export default function Hero() {
   return (
     <div className="relative bg-forest-dark text-paper overflow-hidden">
       <BlueprintBackground />
@@ -66,7 +60,8 @@ export default function Hero() {
             </div>
           ))}
           <div className="mt-[14px] text-[11.5px] text-[#7C8F86]">
-            Reference only, not a rate lock
+            {asOf ? <div>As of {asOf}</div> : null}
+            <div className={asOf ? 'mt-[4px]' : undefined}>Reference only, not a rate lock</div>
           </div>
         </div>
       </div>

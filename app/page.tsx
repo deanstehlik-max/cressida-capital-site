@@ -10,6 +10,10 @@ import { getClosings } from '@/lib/closings';
 import { getPublishedInsights } from '@/lib/insights';
 import { guides } from '@/lib/guides';
 
+// Benchmark rates are fetched from public sources. Refresh the page every
+// six hours, matching the fetch cache in lib/rates.ts.
+export const revalidate = 21600;
+
 export const metadata: Metadata = {
   title: 'Commercial Real Estate Financing Nationwide',
   description:
