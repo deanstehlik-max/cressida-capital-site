@@ -8,6 +8,9 @@ export const brand = {
   founded: 2013,
   yearsInBusiness: new Date().getFullYear() - 2013,
   license: 'CA Broker License #01956862',
+  // California Department of Real Estate public license lookup.
+  // There is no NMLS number on file in this repo — do not invent one.
+  dreLicenseLookupUrl: 'https://www2.dre.ca.gov/PublicASP/pplinfo.asp',
   phone: '877.308.5775',
   email: 'info@cressidacapital.com',
   city: 'Los Angeles',

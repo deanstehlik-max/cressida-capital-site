@@ -51,11 +51,41 @@ export default function Footer() {
             ]}
           />
         </div>
-        <div className="mt-9 pt-5 border-t border-hair text-[11.5px] text-grey flex justify-between flex-wrap gap-2.5">
-          <div>
-            &copy; {new Date().getFullYear()} {brand.legalName}. All rights reserved. {brand.license}.
+        <div className="mt-9 border-t border-hair pt-5 text-[11.5px] leading-relaxed text-grey">
+          <div className="max-w-[76ch] space-y-1.5">
+            <p>
+              <a
+                href={brand.dreLicenseLookupUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-forest"
+              >
+                {brand.license}
+              </a>
+              {' '}({brand.legalName}). Confirm this license on the California
+              Department of Real Estate public license lookup.
+            </p>
+            <p>
+              Information on this website is for reference only and is not a
+              commitment to lend. Loans are subject to lender approval.
+            </p>
           </div>
-          <div>{brand.city}, {brand.region}</div>
+          <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <div>
+              &copy; {new Date().getFullYear()} {brand.legalName}. All rights reserved.
+            </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-1">
+              <Link href="/privacy" className="hover:text-forest">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-forest">
+                Terms of Use
+              </Link>
+              <span>
+                {brand.city}, {brand.region}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

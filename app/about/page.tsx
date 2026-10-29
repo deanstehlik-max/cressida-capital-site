@@ -6,7 +6,7 @@ import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: 'About Cressida Capital',
+  title: 'About',
   description:
     'Cressida Capital is a full-service commercial real estate finance advisory firm, founded in 2013, with $800M+ in financing arranged nationwide.',
   alternates: { canonical: '/about' },
