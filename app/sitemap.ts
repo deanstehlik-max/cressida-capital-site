@@ -37,6 +37,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/for-brokers',
     '/contact',
     '/start-a-loan-request',
+    '/privacy',
+    '/terms',
   ];
 
   const dynamicRoutes = [

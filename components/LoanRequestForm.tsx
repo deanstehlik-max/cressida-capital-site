@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { loanPrograms } from './LoanProgramsTable';
+import { HONEYPOT_FIELD } from '@/lib/spam';
 
 const propertyTypes = [
   'Retail',
@@ -49,6 +51,7 @@ export default function LoanRequestForm({
       propertyState: data.get('propertyState'),
       message: data.get('message'),
       sourcePage,
+      [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
     };
 
     try {
@@ -86,7 +89,7 @@ export default function LoanRequestForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-[640px]">
+    <form onSubmit={handleSubmit} className="relative space-y-6 max-w-[640px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Full name" name="fullName" required variant={variant} />
         <Field label="Email" name="email" type="email" required variant={variant} />
@@ -138,13 +141,37 @@ export default function LoanRequestForm({
         <p className="text-sm text-signal" style={{ color: '#C6482E' }}>{errorMessage}</p>
       )}
 
-      <button
-        type="submit"
-        disabled={status === 'submitting'}
-        className="px-6 py-3 text-sm font-medium bg-brass text-white disabled:opacity-60 hover:opacity-90 transition-opacity"
-      >
-        {status === 'submitting' ? 'Submitting\u2026' : 'Submit Loan Request'}
-      </button>
+      <div>
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="px-6 py-3 text-sm font-medium bg-brass text-white disabled:opacity-60 hover:opacity-90 transition-opacity"
+        >
+          {status === 'submitting' ? 'Submitting\u2026' : 'Submit Loan Request'}
+        </button>
+        <p className="mt-3 max-w-[54ch] text-[12px] leading-relaxed text-grey">
+          By submitting this form, you agree to the{' '}
+          <Link href="/terms" className="underline underline-offset-2 hover:text-forest">
+            Terms of Use
+          </Link>{' '}
+          and{' '}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-forest">
+            Privacy Policy
+          </Link>{' '}
+          and consent to be contacted by phone, email, and text about this request.
+        </p>
+      </div>
+      <div className="absolute h-px w-px overflow-hidden opacity-0" aria-hidden="true">
+        <label htmlFor={HONEYPOT_FIELD}>Website</label>
+        <input
+          id={HONEYPOT_FIELD}
+          name={HONEYPOT_FIELD}
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
     </form>
   );
 }

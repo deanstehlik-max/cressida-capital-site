@@ -6,7 +6,7 @@ import LoanRequestForm from '@/components/LoanRequestForm';
 import { brand } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: 'Start a Loan Request | Cressida Capital',
+  title: 'Start a Loan Request',
   description:
     'Start a commercial real estate loan request with Cressida Capital. Tell us about your deal and a loan officer will follow up, or call 877.308.5775.',
   alternates: { canonical: '/start-a-loan-request' },
