@@ -1,3 +1,4 @@
+import { unpublishedInsightDraft } from '@/lib/insightDrafts';
 import { getSupabaseServerClient } from '@/lib/supabase';
 
 export type InsightPost = {
@@ -46,10 +47,12 @@ export async function getInsightBySlug(slug: string): Promise<InsightPost | null
       .eq('is_published', true)
       .single();
 
-    if (error) return null;
-    return data;
+    if (!error && data) return data;
   } catch (err) {
     console.error('getInsightBySlug failed:', err);
-    return null;
   }
+
+  // Published rows only come from Supabase. A repo draft renders in
+  // development when no published row exists, and never in production.
+  return unpublishedInsightDraft(slug);
 }

@@ -27,6 +27,23 @@ export type Closing = {
  * The ledger does not render images — none of the existing rows have one.
  */
 const repoClosings: Closing[] = [
+  // HVAC roll-up: one $4.22M figure ($3,720,000 SBA 7(a) plus a $500,000
+  // pari passu conventional loan). Those pieces are not separate rows.
+  // No city, borrower, lender, or holding-company name was in the source.
+  // No commercial real estate, so property_type stays empty.
+  // closed_on is not shown. The source has no close date; 2026-11-11 only
+  // sorts this row newest-first. Replace it with the real close date
+  // before this ships.
+  {
+    id: 'virginia-hvac-rollup-sba-7a',
+    closed_on: '2026-11-11',
+    loan_program: 'sba',
+    property_type: null,
+    deal_title: 'HVAC roll-up debt consolidation',
+    city: null,
+    state: 'VA',
+    amount: 4_220_000,
+  },
   {
     id: 'cape-coral-sba-504-assisted-living',
     closed_on: '2026-10-16',
