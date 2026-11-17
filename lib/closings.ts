@@ -27,6 +27,22 @@ export type Closing = {
  * The ledger does not render images — none of the existing rows have one.
  */
 const repoClosings: Closing[] = [
+  // Shawnee flagged hotel: $1.3M SBA 7(a) refinance, 25-year fully
+  // amortizing, placed with an SBA lender partner. No borrower, brand,
+  // or street address. property_type uses the hospitality slug from
+  // lib/propertyTypes.ts (hotels and other lodging). The ledger does not
+  // render images. closed_on is not shown; 2026-11-16 is a placeholder
+  // that only sorts this row newest-first.
+  {
+    id: 'shawnee-ok-flagged-hotel-sba-7a',
+    closed_on: '2026-11-16',
+    loan_program: 'sba',
+    property_type: 'hospitality',
+    deal_title: 'Flagged hotel refinance',
+    city: 'Shawnee',
+    state: 'OK',
+    amount: 1_300_000,
+  },
   // HVAC roll-up: one $4.22M figure ($3,720,000 SBA 7(a) plus a $500,000
   // pari passu conventional loan). Those pieces are not separate rows.
   // No city, borrower, lender, or holding-company name was in the source.
