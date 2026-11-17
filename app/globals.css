@@ -141,3 +141,14 @@
   margin-top: 2em;
   margin-bottom: 0.75em;
 }
+/* Insight photos stay at file size, capped near 300px, and shrink on a
+   narrow column. width: auto keeps a 299px source from being upscaled. */
+.prose-cressida img {
+  width: auto;
+  max-width: min(100%, 300px);
+  height: auto;
+}
+.prose-cressida a {
+  color: theme('colors.forest');
+  border-bottom: 1px solid theme('colors.forest');
+}
